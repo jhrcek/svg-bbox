@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Getting SVG Bounding Box info through ports</title>
+  <script src="elm.js"></script>
+</head>
+
+<body>
+  <script>
+    var app = Elm.Main.fullscreen();
+    app.ports.requestBBox.subscribe(function(idOfSvgText) {
+      requestAnimationFrame(function() {
+        var text = document.getElementById(idOfSvgText);
+        var bbox = text.getBBox();
+        app.ports.setBBox.send(bbox);
+      })
+    });
+  </script>
+</body>
+
+</html>
